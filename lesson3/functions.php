@@ -115,7 +115,35 @@ function return_assoc_arr(){
         'second'=> $b,
     ];
 }
+
 var_dump(return_num_arr(), return_assoc_arr());
 
 
+// анонимные функции
 
+$pos_num = function ($num){
+    return $num > 0;
+};
+
+// тип перемнной $pos_num - callable
+var_dump(is_callable($pos_num));
+
+function validate_data($data, $validate_func){
+    if ($validate_func($data)) {
+        echo 'Данные валидны';
+    } else {
+        echo 'Данные не прошли проверку';
+    }
+}
+
+$age = 64;
+var_dump($pos_num(-9));
+validate_data($age, $pos_num);
+
+
+function func_name(){
+    echo 'выводимая информация';
+}
+
+$str = 'func_name';
+$str();
