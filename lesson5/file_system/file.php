@@ -69,6 +69,9 @@ function read_file_fgets($filename){
 }
 read_file_fgets($filename);
 
+
+
+
 file_get_contents($filename);
 file_put_contents($filename,
     "то, что нужно записать",
@@ -78,3 +81,25 @@ file_put_contents($filename,
 $arr = file($filename, FILE_IGNORE_NEW_LINES  |
     FILE_SKIP_EMPTY_LINES);
 var_dump($arr);
+
+function write_file($filename, $data){
+    $fp = fopen($filename, 'a');
+    fwrite($fp, $data);
+    fclose($fp);
+}
+
+//открывает файл для чтения или записи,
+//возвращает дескриптор ресурсов
+//$fp = fopen(имя_файла, режим);
+//режим: запись в конец файла 'a', чтение 'r' и тд
+//$fp - дескриптор ресурсов (канал связи между php программой и файлом)
+//fread($fp, length) - читает из канала $fp на length
+//fgets($fp) - читает одну строку из канала $fp
+//fgets($fp, length) - читает на length из канала $fp
+//fwrite($fp, данные_для_записи) - записывает 'данные_для_записи'
+//в канал $fp
+//fclose($fp) закрывает дескриптор ресурсов
+//(канал связи между php программой и файлом)
+//
+//file_get_contents = fopen() + fread() + fclose()
+//file_put_contents = fopen() + fwrite() + fclose()
