@@ -21,6 +21,9 @@ class Article
     }
 
 
+    public function getDate(){
+        return $this->date;
+    }
 
 
 

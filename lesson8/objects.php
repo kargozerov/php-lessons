@@ -56,3 +56,16 @@ var_dump($artile1->getAuthor()->getLogin());
 $qwe->addArticle($artile1);
 $qwe->addArticle($artile2);
 
+// получаем все статьи пользователя $qwe
+$qwe_articles = $qwe->getArticles(); // придет массив со статьями
+var_dump($qwe_articles);
+
+
+// перебор массива
+foreach ($qwe_articles as $one_article){
+    // в $one_article будут попадать объекты стетей
+    var_dump($one_article);
+    // получаем и выводим название статьи и дату
+    var_dump('Cтатья пользователя qwe: ' . $one_article->getTitle());
+    var_dump('Дата написания статьи ' . $one_article->getDate()->format("Y-m-d H:i:s"));
+}
