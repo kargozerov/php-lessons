@@ -30,4 +30,39 @@ abstract class ParamHandler implements IParamHandler
     // абстрактные методы (методы без реализации)
     abstract public function read();
     abstract public function write();
+
+    public static function getHandler($filename){
+        $file_type = pathinfo($filename, PATHINFO_EXTENSION);
+        if (!$file_type) {
+            echo "Тип файла не известен";
+            return false;
+        }
+
+        // формируем имя класса
+        $classname = ucfirst(strtolower($file_type)) . 'Handler';
+        //TxtHandler
+        //JsonHandler
+        $path = __DIR__ . '/' . $classname . '.php';
+        //TxtHandler.php
+        //JsonHandler.php
+
+        require_once $path;
+
+        if (!class_exists($classname)){
+            echo "Класса не существует <br>";
+            return false;
+        }
+
+        $obj = new $classname($filename);
+        //$obj = new TxtHandler($filename);
+        //$obj = new JsonHandler($filename);
+
+        //  Проверяет, содержит ли объект в своем дереве
+        // предков указанный класс либо прямо реализует его
+        if (!is_subclass_of($obj, 'IParamHandler')){
+            echo "Реализован не IParamHandler интерфейс";
+            return false;
+        }
+        return $obj;
+    }
 }

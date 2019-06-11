@@ -1,9 +1,17 @@
 <?php
 require_once "TxtHandler.php";
+require_once "ParamHandler.php";
 
 $filename = 'config.txt';
 
-$file_type = pathinfo($filename, PATHINFO_EXTENSION);
+// В ParamHandler создаем статический  метод getHandler,
+// который в зависимости от переданного файла
+// вернет объект либо класса TxtHandler, либо JsonHandler
+$handler = ParamHandler::getHandler($filename);
+$handler->read();
+$handler->write();
+
+/*$file_type = pathinfo($filename, PATHINFO_EXTENSION);
 
 $handler = null;
 if ($file_type == 'txt'){
@@ -12,8 +20,9 @@ if ($file_type == 'txt'){
     $handler = new JsonHandler($filename);
 }
 $handler->read();
-$handler->write();
+$handler->write();*/
 
-//function some (IParamHandler $handler){
-//    $handler->read();
+//IParamHandler -> ParamHandler -> TxtHandler | JsonHandler
+//function some_void(Овощь $овощи){
+//    $овощи->eat();
 //}
